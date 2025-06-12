@@ -1,0 +1,134 @@
+{
+    "type": "origins:multiple",
+
+	"toggle": {
+	  "type": "origins:toggle",
+	  "key": {
+		"key": "key.origins.secondary_active",
+		"continuous": false
+	  },
+	  "retain_state": false,
+	  "condition": {
+		"type": "apoli:food_level",
+		"comparison": ">",
+		"compare_to": 6
+	  }
+	},
+	
+	"aura": {
+		"type": "origins:particle",
+		"particle": {
+			"type": "minecraft:dust_color_transition",
+			"params": "0.9 0.6 0.8 2 1 1 1"
+		},
+		"spread": {
+			"x": 0.5,
+			"y": 0.5,
+			"z": 0.5
+		},
+		"frequency": 4,
+		"count": 20,
+		"condition": {
+			"type": "origins:power_active",
+			"power": "*:spectrum_toggle"
+		}
+	},
+	
+    "phase": {
+	  "type": "origins:phasing",
+	  "blacklist": true,
+	  "render_type": "blindness",
+	  "view_distance": 10,
+	  "block_condition": {
+		"type": "origins:in_tag",
+		"tag": "origins:unphasable"
+	  },
+	  "phase_down_condition": {
+		"type": "origins:and",
+		"conditions": [
+		  {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:sneaking"
+				},
+				{    
+					"type": "origins:swimming"
+				}
+			]
+		  },
+		  {
+			"type": "origins:on_block"
+		  }
+		]
+	  },
+	  "condition": {
+		"type": "origins:power_active",
+		"power": "*:spectrum_toggle"
+	  }
+	},
+	"swim": {
+		"type": "origins:swimming",
+		"condition": {
+			"type": "origins:power_active",
+			"power": "*:spectrum_toggle"
+		}
+	},
+	"slow_fall": {
+		"type": "origins:modify_falling",
+		"velocity": 0.005,
+		"take_fall_damage": false,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:spectrum_toggle"
+				},
+				{    
+					"type": "origins:sneaking",
+					"inverted": true
+				}
+			]
+		}
+	},
+	"exhaust": {
+		"type": "origins:exhaust",
+		"interval": 5,
+		"exhaustion": 2.0,
+		"condition": {
+			"type": "origins:power_active",
+			"power": "*:spectrum_toggle"
+		}
+	},
+	"collision": {
+		"type": "origins:prevent_entity_collision",
+		"bientity_condition": {
+			"type": "origins:actor_condition",
+			"condition": {
+				"type": "origins:power_active",
+				"power": "*:spectrum_toggle"
+			}
+		}
+	},
+	"shader": {
+		"type": "origins:shader",
+		"shader": "minecraft:shaders/post/notch.json",
+		"condition": {
+			"type": "origins:power_active",
+			"power": "*:spectrum_toggle"
+		}
+	},
+	
+	"translucent": {
+		"type": "origins:model_color",
+		"alpha": 0.2,
+		"condition": {
+			"type": "origins:power_active",
+			"power": "*:spectrum_toggle"
+		}
+	},
+	
+	"name": "Spectrum Form",
+	"description": "You can toggle between a spectrum form for a short period of time, allowing you to phase and swim on the air"
+}

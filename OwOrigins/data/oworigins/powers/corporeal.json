@@ -1,0 +1,52 @@
+{
+	"type": "origins:multiple",
+	
+	"second_chance": {
+		"type": "origins:prevent_death",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:clear_effect"
+				},
+				{
+					"type": "origins:apply_effect",
+					"effects": [
+						{
+							"effect": "minecraft:regeneration",
+							"amplifier": 1,
+							"duration": 900
+						},
+						{
+							"effect": "minecraft:fire_resistance",
+							"duration": 800
+						},
+						{
+							"effect": "minecraft:absorption",
+							"amplifier": 1,
+							"duration": 100
+						}
+					]
+				},
+				{
+					"type": "origins:execute_command",
+                    "command": "power grant @s oworigins:incorporeal"
+				},
+				{
+					"type": "origins:execute_command",
+                    "command": "power remove @s oworigins:corporeal"
+				}
+			]
+		}
+	},
+	"lightweight": {
+		"type": "origins:invulnerability",
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "fall"
+		}
+	},
+	
+	"name": "Corporeal",
+	"description": "Finally achieved a physical body, and lost your weaknesses, you achieved now a superior form"
+}

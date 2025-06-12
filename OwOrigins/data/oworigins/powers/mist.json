@@ -1,0 +1,233 @@
+{
+	"type": "origins:multiple",
+	
+	"flame": {
+		"type": "origins:active_self",
+		"key": {
+			"key": "key.use",
+			"continuous": true
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:swing_hand",
+					"hand": "MAIN_HAND"
+				},
+				{
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:blaze_powder"
+									}
+								}
+							},
+							"action": {
+								"type": "origins:equipped_item_action",
+								"equipment_slot": "mainhand",
+								"action": {
+									"type": "origins:consume",
+									"amount": 1
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:equipped_item",
+								"equipment_slot": "mainhand",
+								"item_condition": {
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:blaze_rod"
+									}
+								}
+							},
+							"action": {
+								"type": "origins:exhaust",
+								"amount": 20.0
+							}
+						}
+					]
+				},
+				{
+					"type": "origins:play_sound",
+					"sound": "minecraft:item.firecharge.use"
+				},
+				{
+					"type": "origins:spawn_particles",
+					"particle": "minecraft:flame",
+					"count": 150,
+					"speed": 0.5,
+					"force": true,
+					"spread": { "x": 0.0, "y": 0.0, "z": 0.0 }
+				},
+				{
+					"type": "origins:area_of_effect",
+					"radius": 5,
+					"shape": "sphere",
+					"bientity_action": {
+						"type": "origins:target_action",
+						"action": {
+							"type": "origins:set_on_fire",
+							"duration": 6
+						}
+					}
+				}
+			]
+		},
+		"cooldown": 10,
+		"hud_render": {
+			"should_render": false
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition": {
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "minecraft:blaze_powder"
+								}
+							},
+							{
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "minecraft:blaze_rod"
+								}
+							}
+						]
+					}
+				},
+				{      
+					"type": "origins:power_active",
+					"power": "*:spectrum_toggle"
+				}
+			]
+
+		}
+	},
+	"flame_tooltip": {
+		"type": "origins:tooltip",
+		"item_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:ingredient",
+					"ingredient": {
+						"item": "minecraft:blaze_powder"
+					}
+				},
+				{
+					"type": "origins:ingredient",
+					"ingredient": {
+						"item": "minecraft:blaze_rod"
+					}
+				}
+			]
+		},
+		"text": "Capable of generating an infernal wave arround you"
+	},
+	
+	"tonic": {
+		"type": "origins:active_self",
+		"key": {
+			"key": "key.use",
+			"continuous": true
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:swing_hand",
+					"hand": "MAIN_HAND"
+				},
+				{
+					"type": "origins:exhaust",
+					"amount": 20.0
+				},
+				{
+					"type": "origins:play_sound",
+					"sound": "minecraft:entity.evoker.prepare_wololo"
+				},
+				{
+					"type": "origins:spawn_particles",
+					"particle": "minecraft:flame",
+					"count": 30,
+					"speed": 0,
+					"force": true,
+					"spread": { "x": 4.0, "y": 0.0, "z": 4.0 }
+				},
+				{
+					"type": "origins:area_of_effect",
+					"radius": 5,
+					"shape": "sphere",
+					"bientity_action": {
+						"type": "origins:target_action",
+						"action": {
+							"type": "origins:set_on_fire",
+							"duration": 1
+						}
+					}
+				},
+				{
+					"type": "origins:spawn_effect_cloud",
+					"radius_on_use": -1,
+					"radius": 5,
+					"effect": {
+						"effect": "minecraft:regeneration",
+						"amplifier": 2,
+						"duration": 100
+					}
+				}
+			]
+		},
+		"cooldown": 60,
+		"hud_render": {
+			"should_render": false
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:ghast_tear"
+						}
+					}
+				},
+				{      
+					"type": "origins:power_active",
+					"power": "*:spectrum_toggle"
+				}
+			]
+
+		}
+	},
+	"tonic_tooltip": {
+		"type": "origins:tooltip",
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"item": "minecraft:ghast_tear"
+			}
+		},
+		"text": "Capable of creating a healing area arround you"
+	},
+	
+	"name": "Mist",
+	"description": "As spectrum form, you can spread item essences to create effects"
+}
