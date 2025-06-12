@@ -1,0 +1,12 @@
+{
+  "type": "origins:pehkui:set_scale",
+  "scale_types": [
+    "pehkui:width"
+  ],
+  "scale": 2.0,
+  "tick_rate": 20,
+  "update_bounding_box": true,
+  "update_eye_height": false,
+  "update_health": false,
+  "update_step_height": false
+}

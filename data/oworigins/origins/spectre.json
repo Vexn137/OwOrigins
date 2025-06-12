@@ -1,0 +1,15 @@
+{
+	"powers": [
+		"oworigins:incorporeal",
+		"oworigins:metavision",
+		"oworigins:essence_reaper",
+		"oworigins:spectrum",
+		"oworigins:mist",
+		"oworigins:ascension"
+	],
+	"icon": "minecraft:ender_eye",
+	"order": 4,
+	"impact": 3,
+	"name": "Spectre",
+	"description": "These bodyless spirit-like creatures who consume xp wander the world in search of obtaining a physical body"
+}
