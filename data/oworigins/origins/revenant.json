@@ -1,0 +1,15 @@
+{
+	"powers": [
+		"oworigins:corporeal",
+		"oworigins:metavision",
+		"oworigins:essence_reaper",
+		
+		"oworigins:spectrum",
+		"oworigins:mist"
+	],
+	"icon": "minecraft:ender_eye",
+	"unchoosable": true,
+	"impact": 2,
+	"name": "Revenant",
+	"description": "A spirit-like creature who consume xp and finally achieved a corporeal ascension"
+}

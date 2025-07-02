@@ -1,6 +1,8 @@
 {
-  "replace": false,
-  "origins": [
-    "oworigins:spectre"
-  ]
+	"replace": false,
+	"origins": [
+		"oworigins:bloodmaw",
+		"oworigins:spectre",
+		"oworigins:revenant"
+	]
 }

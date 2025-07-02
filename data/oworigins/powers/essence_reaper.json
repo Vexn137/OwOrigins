@@ -51,7 +51,7 @@
 				{
 					"type": "origins:if_else_list",
 					"actions": [
-											{
+						{
 							"condition": {
 								"type": "origins:food_level",
 								"comparison": "<",
@@ -65,9 +65,63 @@
 						},
 						{
 							"condition": {
-								"type": "origins:saturation_level",
-								"comparison": "==",
-								"compare_to": 0
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:saturation_level",
+										"comparison": "<=",
+										"compare_to": 4
+									},
+									{
+										"type": "origins:xp_levels",
+										"comparison": ">=",
+										"compare_to": 60
+									}
+								]
+							},
+							"action": {
+								"type": "origins:feed",
+								"food": 1,
+								"saturation": 2
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:saturation_level",
+										"comparison": "<=",
+										"compare_to": 2
+									},
+									{
+										"type": "origins:xp_levels",
+										"comparison": ">=",
+										"compare_to": 30
+									}
+								]
+							},
+							"action": {
+								"type": "origins:feed",
+								"food": 1,
+								"saturation": 2
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{
+										"type": "origins:saturation_level",
+										"comparison": "<=",
+										"compare_to": 0
+									},
+									{
+										"type": "origins:xp_levels",
+										"comparison": ">=",
+										"compare_to": 10
+									}
+								]
 							},
 							"action": {
 								"type": "origins:feed",
@@ -87,9 +141,49 @@
 					"type": "origins:or",
 					"conditions": [
 						{
-							"type": "origins:saturation_level",
-							"comparison": "==",
-							"compare_to": 0
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:saturation_level",
+									"comparison": "<=",
+									"compare_to": 4
+								},
+								{    
+									"type": "origins:xp_levels",
+									"comparison": ">=",
+									"compare_to": 60
+								}
+							]
+						},
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:saturation_level",
+									"comparison": "<=",
+									"compare_to": 2
+								},
+								{    
+									"type": "origins:xp_levels",
+									"comparison": ">=",
+									"compare_to": 30
+								}
+							]
+						},
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:saturation_level",
+									"comparison": "<=",
+									"compare_to": 0
+								},
+								{    
+									"type": "origins:xp_levels",
+									"comparison": ">=",
+									"compare_to": 10
+								}
+							]
 						},
 						{    
 							"type": "origins:food_level",
@@ -104,14 +198,209 @@
 					"compare_to": 1
 				},
 				{
-					"type": "origins:power_active",
-					"power": "*:spectrum_toggle",
-					"inverted": true
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:power_active",
+							"power": "*:spectrum_toggle",
+							"inverted": true
+						},
+						{    
+							"type": "origins:power",
+							"power": "oworigins:corporeal"
+						}
+					]
 				}
 			]
 		}
 	},
 	
+	"xphp_0": {
+		"type": "origins:conditioned_attribute",
+		"modifier": {
+			"name": "Less Health",
+			"attribute": "minecraft:generic.max_health",
+			"operation": "addition",
+			"value": -12
+		},
+		"tick_rate": 20,
+		"update_health": true,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{      
+					"type": "origins:xp_levels",
+					"comparison": "<",
+					"compare_to": 10
+				},
+				{
+					"type": "origins:power",
+					"power": "oworigins:incorporeal"
+				}
+			]
+		}
+	},
+	"xphp_10": {
+		"type": "origins:conditioned_attribute",
+		"modifier": {
+			"name": "Less Health",
+			"attribute": "minecraft:generic.max_health",
+			"operation": "addition",
+			"value": -8
+		},
+		"tick_rate": 20,
+		"update_health": true,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:xp_levels",
+					"comparison": ">=",
+					"compare_to": 10
+				},
+				{      
+					"type": "origins:xp_levels",
+					"comparison": "<",
+					"compare_to": 20
+				},
+				{
+					"type": "origins:power",
+					"power": "oworigins:incorporeal"
+				}
+			]
+		}
+	},
+	"xphp_20": {
+		"type": "origins:conditioned_attribute",
+		"modifier": {
+			"name": "Less Health",
+			"attribute": "minecraft:generic.max_health",
+			"operation": "addition",
+			"value": -4
+		},
+		"tick_rate": 20,
+		"update_health": true,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:xp_levels",
+					"comparison": ">=",
+					"compare_to": 20
+				},
+				{      
+					"type": "origins:xp_levels",
+					"comparison": "<",
+					"compare_to": 30
+				},
+				{
+					"type": "origins:power",
+					"power": "oworigins:incorporeal"
+				}
+			]
+		}
+	},
+	
+	"harvest": {
+		"type": "origins:action_on_entity_use",
+		"bientity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:target_action",
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:spawn_particles",
+								"particle": "minecraft:cloud",
+								"count": 100,
+								"speed": 0.5,
+								"force": true,
+								"spread": { "x": 1.0, "y": 1.0, "z": 1.0 }
+							},
+							{
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:weakness",
+									"duration": 600,
+									"amplifier": 0
+								}
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:actor_action",
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:play_sound",
+								"sound": "minecraft:entity.allay.item_given"
+							},
+							{
+								"type": "origins:execute_command",
+								"command": "xp add @s 8 points"
+							}
+						]
+					}
+				}
+			]
+		},
+		"bientity_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:actor_condition",
+					"condition": {
+					   "type": "origins:sneaking"
+					}
+				},
+				{      
+					"type": "origins:target_condition",
+					"condition": {
+						"type": "origins:status_effect",
+						"effect": "minecraft:weakness",
+						"min_amplifier": 0,
+						"inverted": true
+					}
+				}
+			]
+		},
+		"item_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:ingredient",
+					"ingredient": {
+						"item": "minecraft:stone_hoe"
+					}
+				}
+			]
+		},
+		"held_item_action": {
+			"type": "origins:damage",
+			"amount": 1
+		}
+	},
+	"hoe_tooltip": {
+		"type": "origins:tooltip",
+		"item_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:ingredient",
+					"ingredient": {
+						"item": "minecraft:stone_hoe"
+					}
+				}
+			]
+		},
+		"text": "A perfect tool for harvesting entities essence"
+	},
+	
+	
 	"name": "Essence Reaper",
-	"description": "You need XP instead of food to live, but you can still eating to absorb the xp on the aliments"
+	"description": "You need XP instead of food to live, but you can still eating to absorb the xp on the aliments, your power rely on your xp levels"
 }

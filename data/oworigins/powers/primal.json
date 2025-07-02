@@ -1,0 +1,39 @@
+{
+	"type": "origins:multiple",
+	"nightvision": {
+	    "type": "origins:night_vision",
+		"strength": 1
+	},
+	"armor": {
+		"type": "origins:conditioned_restrict_armor",
+		"head": {
+			"type": "origins:armor_value",
+			"comparison": ">",
+			"compare_to": 2
+		},
+		"chest": {
+			"type": "origins:armor_value",
+			"comparison": ">",
+			"compare_to": 5
+		},
+		"legs": {
+			"type": "origins:armor_value",
+			"comparison": ">",
+			"compare_to": 4
+		},
+		"feet": {
+			"type": "origins:armor_value",
+			"comparison": ">",
+			"compare_to": 1
+		},
+		"tick_rate": 20
+	},
+	"fast": {
+		"type": "origins:attribute_modify_transfer",
+		"class": "modify_break_speed",
+		"attribute": "minecraft:generic.movement_speed",
+		"multiplier": 1.25
+	},
+	"name": "Primal",
+	"description": "You have incredible survival instincts like night vision"	
+}

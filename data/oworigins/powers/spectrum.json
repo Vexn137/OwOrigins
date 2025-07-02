@@ -2,17 +2,14 @@
     "type": "origins:multiple",
 
 	"toggle": {
-	  "type": "origins:toggle",
-	  "key": {
-		"key": "key.origins.secondary_active",
-		"continuous": false
-	  },
-	  "retain_state": false,
-	  "condition": {
-		"type": "apoli:food_level",
-		"comparison": ">",
-		"compare_to": 6
-	  }
+		"type": "origins:toggle",
+		"key": { "key": "key.origins.secondary_active", "continuous": false },
+		"retain_state": false,
+		"condition": {
+			"type": "apoli:food_level",
+			"comparison": ">",
+			"compare_to": 6
+		}
 	},
 	
 	"aura": {
@@ -21,11 +18,7 @@
 			"type": "minecraft:dust_color_transition",
 			"params": "0.9 0.6 0.8 2 1 1 1"
 		},
-		"spread": {
-			"x": 0.5,
-			"y": 0.5,
-			"z": 0.5
-		},
+		"spread": { "x": 0.5, "y": 0.5, "z": 0.5 },
 		"frequency": 4,
 		"count": 20,
 		"condition": {
@@ -35,37 +28,37 @@
 	},
 	
     "phase": {
-	  "type": "origins:phasing",
-	  "blacklist": true,
-	  "render_type": "blindness",
-	  "view_distance": 10,
-	  "block_condition": {
-		"type": "origins:in_tag",
-		"tag": "origins:unphasable"
-	  },
-	  "phase_down_condition": {
-		"type": "origins:and",
-		"conditions": [
-		  {
-			"type": "origins:or",
+		"type": "origins:phasing",
+		"blacklist": true,
+		"render_type": "blindness",
+		"view_distance": 10,
+		"block_condition": {
+			"type": "origins:in_tag",
+			"tag": "origins:unphasable"
+		},
+		"phase_down_condition": {
+			"type": "origins:and",
 			"conditions": [
 				{
-					"type": "origins:sneaking"
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:sneaking"
+						},
+						{    
+							"type": "origins:swimming"
+						}
+					]
 				},
-				{    
-					"type": "origins:swimming"
+				{
+					"type": "origins:on_block"
 				}
 			]
-		  },
-		  {
-			"type": "origins:on_block"
-		  }
-		]
-	  },
-	  "condition": {
-		"type": "origins:power_active",
-		"power": "*:spectrum_toggle"
-	  }
+		},
+		  "condition": {
+			"type": "origins:power_active",
+			"power": "*:spectrum_toggle"
+		}
 	},
 	"swim": {
 		"type": "origins:swimming",
@@ -129,6 +122,325 @@
 		}
 	},
 	
+	"damage_dealt": {
+		"type": "origins:modify_damage_dealt",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:spectrum_toggle"
+				},
+				{    
+					"type": "origins:status_effect",
+					"effect": "minecraft:weakness",
+					"min_amplifier": 0,
+					"inverted": true
+				},
+				{
+					"type": "origins:swimming"
+				}
+			]
+		},
+		"bientity_action": {
+			"type": "origins:invert",
+			"action": {
+				"type": "origins:add_velocity",
+				"z": -1.5
+			}
+		},
+		"target_action": {
+			"type": "origins:and",
+			"actions": [
+				{    
+					"type": "origins:apply_effect",
+					"effect": {
+						"effect": "minecraft:slowness",
+						"duration": 30,
+						"amplifier": 4
+					}
+				},
+				{    
+					"type": "origins:apply_effect",
+					"effect": {
+						"effect": "minecraft:blindness",
+						"duration": 60,
+						"amplifier": 0
+					}
+				}
+			]
+		},
+		"self_action": {
+			"type": "origins:and",
+			"actions": [
+				{    
+					"type": "origins:apply_effect",
+					"effect": {
+						"effect": "minecraft:weakness",
+						"duration": 120,
+						"amplifier": 0
+					}
+				},
+				{
+					"type": "origins:exhaust",
+					"amount": 16.0
+				},
+				{    
+				    "type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{    
+										"type": "origins:status_effect",
+										"effect": "minecraft:absorption",
+										"min_amplifier": 4,
+										"inverted": true
+									},
+									{
+										"type": "origins:xp_levels",
+										"comparison": ">=",
+										"compare_to": 100
+									}
+								]
+							},
+							"action": {
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:absorption",
+									"duration": 600,
+									"amplifier": 4
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{    
+										"type": "origins:status_effect",
+										"effect": "minecraft:absorption",
+										"min_amplifier": 3,
+										"inverted": true
+									},
+									{
+										"type": "origins:xp_levels",
+										"comparison": ">=",
+										"compare_to": 60
+									}
+								]
+							},
+							"action": {
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:absorption",
+									"duration": 600,
+									"amplifier": 3
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{    
+										"type": "origins:status_effect",
+										"effect": "minecraft:absorption",
+										"min_amplifier": 2,
+										"inverted": true
+									},
+									{
+										"type": "origins:xp_levels",
+										"comparison": ">=",
+										"compare_to": 50
+									}
+								]
+							},
+							"action": {
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:absorption",
+									"duration": 600,
+									"amplifier": 2
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{    
+										"type": "origins:status_effect",
+										"effect": "minecraft:absorption",
+										"min_amplifier": 1,
+										"inverted": true
+									},
+									{
+										"type": "origins:xp_levels",
+										"comparison": ">=",
+										"compare_to": 40
+									}
+								]
+							},
+							"action": {
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:absorption",
+									"duration": 600,
+									"amplifier": 1
+								}
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:and",
+								"conditions": [
+									{    
+										"type": "origins:status_effect",
+										"effect": "minecraft:absorption",
+										"min_amplifier": 0,
+										"inverted": true
+									},
+									{
+										"type": "origins:xp_levels",
+										"comparison": ">=",
+										"compare_to": 30
+									}
+								]
+							},
+							"action": {
+								"type": "origins:apply_effect",
+								"effect": {
+									"effect": "minecraft:absorption",
+									"duration": 600,
+									"amplifier": 0
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		"modifiers": [
+			{
+				"name": "Increased extra hit damage when spectrum form",
+				"operation": "addition",
+				"value": 2.0
+			},
+			{
+				"name": "Increased first hit damage when spectrum form",
+				"operation": "multiply_total",
+				"value": 1.0
+			}
+		]
+	},
+	
+	"hit": {
+		"type": "origins:modify_damage_dealt",
+		"condition": {
+			"type": "origins:power_active",
+			"power": "*:spectrum_toggle"
+		},
+		"self_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:toggle",
+					"power": "*:spectrum_toggle"
+				}
+			]
+		}
+	},
+	
+	"far_glow": {
+		"type": "origins:entity_glow",
+		"bientity_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:actor_condition",
+					"condition": {
+						"type": "origins:power_active",
+						"power": "*:spectrum_toggle"
+					}
+				},
+				{
+					"type": "origins:distance",
+					"comparison": ">",
+					"compare_to": 20
+				},
+				{
+					"type": "origins:distance",
+					"comparison": "<=",
+					"compare_to": 30
+				}
+			]
+
+		},
+		"use_teams": false,
+		"red": 0.1, "green": 0.1, "blue": 0.1
+	},
+	"medium_glow": {
+		"type": "origins:entity_glow",
+		"bientity_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:actor_condition",
+					"condition": {
+						"type": "origins:power_active",
+						"power": "*:spectrum_toggle"
+					}
+				},
+				{
+					"type": "origins:distance",
+					"comparison": ">",
+					"compare_to": 10
+				},
+				{
+					"type": "origins:distance",
+					"comparison": "<=",
+					"compare_to": 20
+				}
+			]
+
+		},
+		"use_teams": false,
+		"red": 0.3, "green": 0.3, "blue": 0.3
+	},
+	"close_glow": {
+		"type": "origins:entity_glow",
+		"bientity_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:actor_condition",
+					"condition": {
+						"type": "origins:power_active",
+						"power": "*:spectrum_toggle"
+					}
+				},
+				{
+					"type": "origins:distance",
+					"comparison": "<=",
+					"compare_to": 10
+				}
+			]
+
+		},
+		"use_teams": false,
+		"red": 0.5, "green": 0.5, "blue": 0.5
+	},
+	
+	"selection": {
+		"type": "origins:prevent_block_selection",
+		"condition": {
+			"type": "origins:power_active",
+			"power": "*:spectrum_toggle"
+		}
+	},
+	
 	"name": "Spectrum Form",
-	"description": "You can toggle between a spectrum form for a short period of time, allowing you to phase and swim on the air"
+	"description": "You can toggle between a spectrum form for a short period of time, allowing you to phase and swim on the air. While swimming, you can deal an enhanced attack"
 }

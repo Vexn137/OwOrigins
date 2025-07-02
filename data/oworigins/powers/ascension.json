@@ -3,10 +3,7 @@
 	
 	"ascend": {
 		"type": "origins:active_self",
-		"key": {
-			"key": "key.use",
-			"continuous": true
-		},
+		"key": { "key": "key.use", "continuous": true },
 		"entity_action": {
 			"type": "origins:and",
 			"actions": [
@@ -23,6 +20,21 @@
 					}
 				},
 				{
+					"type": "origins:apply_effect",
+					"effects": [
+						{
+							"effect": "minecraft:absorption",
+							"amplifier": 1,
+							"duration": 100
+						},
+						{
+							"effect": "minecraft:regeneration",
+							"amplifier": 2,
+							"duration": 60
+						}
+					]
+				},
+				{
 					"type": "origins:play_sound",
 					"sound": "minecraft:block.beacon.power_select"
 				},
@@ -35,19 +47,21 @@
 					"spread": { "x": 0.0, "y": 0.0, "z": 0.0 }
 				},
 				{
-					"type": "origins:execute_command",
-                    "command": "power grant @s oworigins:corporeal"
+					"type": "origins:spawn_particles",
+					"particle": "minecraft:flash",
+					"count": 4,
+					"speed": 0.0,
+					"force": true,
+					"spread": { "x": 0.0, "y": 0.0, "z": 0.0 }
 				},
 				{
 					"type": "origins:execute_command",
-                    "command": "power remove @s oworigins:incorporeal"
+                    "command": "origin set @s origins:origin oworigins:revenant"
 				}
 			]
 		},
 		"cooldown": 20,
-		"hud_render": {
-			"should_render": false
-		},
+		"hud_render": { "should_render": false },
 		"condition": {
 			"type": "origins:and",
 			"conditions": [
@@ -64,6 +78,11 @@
 				{      
 					"type": "origins:power_active",
 					"power": "*:spectrum_toggle"
+				},
+				{      
+					"type": "origins:xp_levels",
+					"comparison": ">=",
+					"compare_to": 30
 				}
 			]
 		}

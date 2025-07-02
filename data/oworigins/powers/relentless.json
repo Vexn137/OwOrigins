@@ -1,0 +1,59 @@
+{
+	"type": "origins:multiple",
+	"exhaustion": {
+		"type": "origins:modify_exhaustion",
+		"modifier": {
+			"name": "No exhaustion",
+			"operation": "multiply_base",
+			"value": 2
+		}
+	},
+	"exhaust": {
+		"type": "origins:exhaust",
+		"interval": 10,
+		"exhaustion": 0.1
+	},
+	"carnivore": {
+		"type": "origins:prevent_item_use",
+		"item_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:food"
+				},
+				{    
+					"type": "origins:meat",
+					"inverted": true
+				}
+			]
+		}
+	},
+	"hungry": {
+		"type": "origins:shaking",
+		"condition": {
+			"type": "origins:food_level",
+			"comparison": "<=",
+			"compare_to": 6
+		}
+	},
+	"kill": {
+		"type": "origins:self_action_on_kill",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{    
+					"type": "origins:feed",
+					"food": 4,
+					"saturation": 1
+				},
+				{
+					"type": "origins:heal",
+					"amount": 4.0
+				}
+			]
+
+		}
+	},
+	"name": "Relentless",
+	"description": "Endless hunger of blood makes you seek death on everything on your surroundings"
+}

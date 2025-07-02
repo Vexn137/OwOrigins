@@ -1,0 +1,12 @@
+{
+	"powers": [
+		"oworigins:primal",
+		"oworigins:relentless",
+		"oworigins:ravenous"
+	],
+	"icon": "minecraft:fermented_spider_eye",
+	"order": 4,
+	"impact": 2,
+	"name": "Bloodmaw",
+	"description": "Relentless blood hunters, they have inmense power to kill and become stronger"
+}

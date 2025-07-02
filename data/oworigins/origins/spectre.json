@@ -3,11 +3,13 @@
 		"oworigins:incorporeal",
 		"oworigins:metavision",
 		"oworigins:essence_reaper",
+		
 		"oworigins:spectrum",
 		"oworigins:mist",
+		
 		"oworigins:ascension"
 	],
-	"icon": "minecraft:ender_eye",
+	"icon": "minecraft:ender_pearl",
 	"order": 4,
 	"impact": 3,
 	"name": "Spectre",
