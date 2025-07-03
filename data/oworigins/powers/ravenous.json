@@ -49,14 +49,14 @@
 					"effect": {
 						"effect": "minecraft:slowness",
 						"duration": 40,
-						"amplifier": 4
+						"amplifier": 2
 					}
 				},
 				{    
 					"type": "origins:apply_effect",
 					"effect": {
 						"effect": "minecraft:blindness",
-						"duration": 40,
+						"duration": 10,
 						"amplifier": 0
 					}
 				},
@@ -65,7 +65,7 @@
 					"effect": {
 						"effect": "minecraft:weakness",
 						"duration": 100,
-						"amplifier": 1
+						"amplifier": 0
 					}
 				}
 			]
@@ -75,20 +75,34 @@
 			"actions": [
 				{    
 					"type": "origins:feed",
-					"food": 2,
-					"saturation": 0
+					"food": 0.5,
+					"saturation": 0.1
 				}
 			]
 		},
 		"modifiers": [
 			{
 				"name": "Increased first hit damage when spectrum form",
+				"operation": "addition",
+				"value": 1
+			},
+			{
+				"name": "Increased first hit damage when spectrum form",
 				"operation": "multiply_total",
-				"value": 0.5
+				"value": 0.3
 			}
 		]
 	},
-	"claws": {
+	"damage": {
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Base damage increase",
+			"attribute": "minecraft:generic.attack_damage",
+			"operation": "addition",
+			"value": 2
+		}
+	},
+	"crit": {
 		"type": "origins:modify_damage_dealt",
 		"condition": {
 			"type": "origins:and",
@@ -108,6 +122,11 @@
 							}
 						]
 					}
+				},
+				{
+					"type": "origins:fall_distance",
+					"comparison": ">",
+					"compare_to": 0
 				}
 			]
 		},
@@ -129,7 +148,7 @@
 			"actions": [
 				{    
 					"type": "origins:feed",
-					"food": 1,
+					"food": 0.5,
 					"saturation": 0
 				},
 				{
@@ -140,13 +159,13 @@
 		},
 		"modifiers": [
 			{
-				"name": "Increased extra hit damage when spectrum form",
+				"name": "Add crit damage",
 				"operation": "addition",
-				"value": 4.0
+				"value": 1
 			},
 			{
-				"name": "Increased first hit damage when spectrum form",
-				"operation": "multiply_total",
+				"name": "Increased crit damage",
+				"operation": "multiply_base",
 				"value": 0.1
 			}
 		]
@@ -192,22 +211,160 @@
 	},
 	"roar": {
 		"type": "origins:active_self",
+		"key": {
+			"key": "key.origins.primary_active",
+			"continuous": true
+		},
 		"entity_action": {
 			"type": "origins:and",
 			"actions": [
+				{
+					"type": "origins:play_sound",
+					"sound": "minecraft:entity.warden.death",
+					"volume": 1.5
+				},
 				{    
 					"type": "origins:extinguish"
 				},
 				{
-					"type": "origins:clear_effect"
+					"type": "origins:clear_effect",
+					"effect": "minecraft:poison"
+				},
+				{
+					"type": "origins:clear_effect",
+					"effect": "minecraft:wither"
+				},
+				{
+					"type": "origins:clear_effect",
+					"effect": "minecraft:weakness"
+				},
+				{
+					"type": "origins:clear_effect",
+					"effect": "minecraft:blindness"
 				},
 				{
 					"type": "origins:heal",
-					"amount": 4.0
+					"amount": 5.0
+				},
+				{
+					"type": "origins:exhaust",
+					"amount": 12
+				},
+				{
+					"type": "origins:apply_effect",
+					"effects": [
+						{
+							"effect": "minecraft:speed",
+							"duration": 40,
+							"amplifier": 1,
+							"is_ambient": false,
+							"show_particles": false,
+							"show_icon": true
+						},
+						{
+							"effect": "minecraft:strength",
+							"duration": 20,
+							"amplifier": 2,
+							"is_ambient": false,
+							"show_particles": false,
+							"show_icon": true
+						},
+						{
+							"effect": "minecraft:resistance",
+							"duration": 20,
+							"amplifier": 4,
+							"is_ambient": false,
+							"show_particles": false,
+							"show_icon": true
+						},
+						{
+							"effect": "minecraft:resistance",
+							"duration": 80,
+							"amplifier": 2,
+							"is_ambient": false,
+							"show_particles": false,
+							"show_icon": true
+						}
+					]
+				},
+				{
+					"type": "origins:area_of_effect",
+					"radius": 32,
+					"bientity_action": {
+						"type": "origins:target_action",
+						"action": {
+							"type": "origins:apply_effect",
+							"effects": [
+								{
+									"effect": "minecraft:glowing",
+									"duration": 120,
+									"is_ambient": false,
+									"show_particles": false,
+									"show_icon": true
+								},
+								{
+									"effect": "minecraft:weakness",
+									"duration": 120,
+									"amplifier": 0,
+									"is_ambient": false,
+									"show_particles": false,
+									"show_icon": true
+								}
+							]
+						}
+					},
+					"bientity_condition": {
+						"type": "origins:can_see"
+					}
+				},
+				{
+					"type": "origins:raycast",
+					"distance": 16,
+					"entity": true,
+					"shape_type": "visual",
+					"fluid_handling": "any",
+					"bientity_action": {
+						"type": "origins:target_action",
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:apply_effect",
+									"effects": [
+										{
+											"effect": "minecraft:weakness",
+											"duration": 120,
+											"amplifier": 2,
+											"is_ambient": false,
+											"show_particles": false,
+											"show_icon": true
+										},
+										{
+											"effect": "minecraft:slowness",
+											"duration": 120,
+											"amplifier": 2,
+											"is_ambient": false,
+											"show_particles": false,
+											"show_icon": true
+										},
+										{
+											"effect": "minecraft:blindness",
+											"duration": 120,
+											"is_ambient": false,
+											"show_particles": false,
+											"show_icon": true
+										}
+									]
+								}
+							]
+						}
+					},
+					"command_step": 1,
+					"command_along_ray_only_on_hit": true
 				}
 			]
 		},
-		"cooldown": 200,
+		"cooldown": 240,
 		"hud_render": { "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png", "should_render": true }
 	},
 	"name": "Ravenous",

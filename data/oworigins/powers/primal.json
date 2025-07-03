@@ -1,9 +1,5 @@
 {
 	"type": "origins:multiple",
-	"nightvision": {
-	    "type": "origins:night_vision",
-		"strength": 1
-	},
 	"armor": {
 		"type": "origins:conditioned_restrict_armor",
 		"head": {
@@ -34,6 +30,42 @@
 		"attribute": "minecraft:generic.movement_speed",
 		"multiplier": 1.25
 	},
+	"predator": {
+		"type": "origins:invisibility",
+		"render_armor": false,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:or",
+						"conditions": [
+							{
+								"type": "origins:block",
+								"block": "minecraft:tall_grass"
+							},
+							{
+								"type": "origins:block",
+								"block": "minecraft:peony"
+							},
+							{
+								"type": "origins:block",
+								"block": "minecraft:rose_bush"
+							},
+							{
+								"type": "origins:block",
+								"block": "minecraft:oak_leaves"
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:sneaking"
+				}
+			]
+		}
+	},
 	"name": "Primal",
-	"description": "You have incredible survival instincts like night vision"	
+	"description": "You have incredible survival instincts"	
 }

@@ -1,0 +1,54 @@
+{
+	"type": "origins:multiple",
+	"damage": {
+		"type": "origins:modify_insomnia_ticks",
+		"modifier": {
+			"operation": "set_total",
+			"value": 0
+		}
+	},
+	"sleephunger": {
+		"type": "origins:action_on_wake_up",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:apply_effect",
+					"effects": [
+						{
+							"effect": "minecraft:hunger",
+							"duration": 60,
+							"amplifier": 2,
+							"is_ambient": true,
+							"show_particles": true,
+							"show_icon": true
+						}
+					]
+				},
+				{
+					"type": "origins:apply_effect",
+					"effects": [
+						{
+							"effect": "minecraft:hunger",
+							"duration": 600,
+							"amplifier": 0,
+							"is_ambient": true,
+							"show_particles": true,
+							"show_icon": true
+						}
+					]
+				},
+				{
+					"type": "origins:exhaust",
+					"amount": 12
+				}
+			]
+		}
+	},
+	"nightvision": {
+	    "type": "origins:night_vision",
+		"strength": 1
+	},
+	"name": "Nocturne",
+	"description": "Night hunter, night vision"
+}

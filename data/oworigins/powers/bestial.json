@@ -1,0 +1,67 @@
+{
+	"type": "origins:multiple",
+	"weakness": {
+		"type": "origins:modify_damage_taken",
+		"damage_condition": {
+			"type": "origins:attacker",
+			"entity_condition": {
+				"type": "origins:equipped_item",
+				"equipment_slot": "mainhand",
+				"item_condition": {
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:harvest_level",
+							"comparison": "<=",
+							"compare_to": 1
+						}
+					]
+				}
+			}
+		},
+		"modifier": {
+			"name": "Weakness",
+			"operation": "multiply_total",
+			"value": 0.5
+		}
+	},
+	"taken": {
+		"type": "origins:modify_damage_taken",
+		"modifier": {
+			"name": "Weakness",
+			"operation": "multiply_total",
+			"value": 0.5
+		}
+	},
+	"meathit": {
+        "type": "origins:action_when_hit",
+		"damage_condition": {
+			"type": "origins:attacker",
+			"entity_condition": {
+				"type": "origins:equipped_item",
+				"equipment_slot": "mainhand",
+				"item_condition": {
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:meat"
+						}
+					]
+				}
+			}
+		},
+        "bientity_action": {
+			"type": "origins:target_action",
+			"action": {
+				"type": "origins:apply_effect",
+				"effect": {
+					"effect": "minecraft:hunger",
+					"duration": 60,
+					"amplifier": 1
+				}
+			}
+        }
+	},
+	"name": "Bestial",
+	"description": "You are fragile"
+}

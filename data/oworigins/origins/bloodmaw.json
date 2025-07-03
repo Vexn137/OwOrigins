@@ -2,7 +2,9 @@
 	"powers": [
 		"oworigins:primal",
 		"oworigins:relentless",
-		"oworigins:ravenous"
+		"oworigins:ravenous",
+		"oworigins:nocturne",
+		"oworigins:bestial"
 	],
 	"icon": "minecraft:fermented_spider_eye",
 	"order": 4,

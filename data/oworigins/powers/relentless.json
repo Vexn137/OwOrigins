@@ -1,5 +1,8 @@
 {
 	"type": "origins:multiple",
+	"naturalregen": {
+		"type": "origins:disable_regen"
+	},
 	"exhaustion": {
 		"type": "origins:modify_exhaustion",
 		"modifier": {
@@ -31,9 +34,19 @@
 	"hungry": {
 		"type": "origins:shaking",
 		"condition": {
-			"type": "origins:food_level",
-			"comparison": "<=",
-			"compare_to": 6
+			"type": "apoli:or",
+			"conditions": [
+				{
+					"type": "apoli:food_level",
+					"comparison": "<=",
+					"compare_to": 6
+				},
+				{
+					"type": "origins:health",
+					"comparison": "<",
+					"compare_to": 10
+				}
+			]
 		}
 	},
 	"kill": {
@@ -44,14 +57,58 @@
 				{    
 					"type": "origins:feed",
 					"food": 4,
-					"saturation": 1
+					"saturation": 0.5
 				},
 				{
 					"type": "origins:heal",
-					"amount": 4.0
+					"amount": 3.0
 				}
 			]
 
+		}
+	},
+	"hungeroverlay": {
+		"type": "apoli:overlay",
+		"hidden": true,
+		"texture": "minecraft:textures/misc/nausea.png",
+		"red": 0.5,
+		"green": 0.2,
+		"blue": 0.2,
+		"strength": 0.7,
+		"draw_mode": "nausea",
+		"draw_phase": "above_hud",
+		"visible_in_third_person": true,
+		"hide_with_hud": false,
+		"condition": {
+			"type": "apoli:or",
+			"conditions": [
+				{
+					"type": "apoli:food_level",
+					"comparison": "<=",
+					"compare_to": 6
+				},
+				{
+					"type": "origins:health",
+					"comparison": "<",
+					"compare_to": 10
+				}
+			]
+		}
+	},
+	"meat": {
+		"type": "origins:modify_food",
+		"always_edible": true,
+		"item_condition": {
+			"type": "origins:meat"
+		},
+		"entity_action": {
+			"type": "origins:heal",
+			"amount": 1
+		},
+		"saturation_modifier": {
+			"name": "Increased saturation points",
+			"operation": "multiply_total_multiplicative",
+			"value": -1
 		}
 	},
 	"name": "Relentless",
